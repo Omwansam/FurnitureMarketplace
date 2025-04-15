@@ -6,11 +6,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('en-US', {
+  // Convert from USD to KSH (approximate exchange rate: 1 USD = 130 KSH)
+  const kshAmount = amount * 130;
+  
+  return new Intl.NumberFormat('en-KE', {
     style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2
-  }).format(amount);
+    currency: 'KES',
+    currencyDisplay: 'narrowSymbol',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(kshAmount);
 }
 
 export function truncateText(text: string, maxLength: number): string {

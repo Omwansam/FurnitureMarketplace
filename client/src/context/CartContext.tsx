@@ -53,11 +53,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return total + (price * item.quantity);
   }, 0);
   
-  // Fixed shipping rate for demo purposes
-  const shipping = subtotal > 0 ? 29.99 : 0;
+  // Fixed shipping rate for demo purposes (converted to KSH)
+  const shipping = subtotal > 0 ? 3900 : 0; // 29.99 USD ≈ 3,900 KSH
   
-  // Calculate tax (10% for demo)
-  const tax = subtotal * 0.1;
+  // Calculate tax (16% VAT in Kenya)
+  const tax = subtotal * 0.16;
   
   // Calculate total
   const total = subtotal + shipping + tax;
