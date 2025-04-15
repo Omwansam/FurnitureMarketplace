@@ -514,6 +514,85 @@ export class MemStorage implements IStorage {
         featured: false,
         isNew: false,
         images: ["https://images.unsplash.com/photo-1580327942498-53a877c6d0ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"]
+      },
+      {
+        name: "Bunk Bed",
+        sku: "PRD-028",
+        slug: "bunk-bed",
+        description: "Space-saving bunk bed for children's bedrooms with sturdy ladder and safety rails.",
+        price: "749.99",
+        categoryId: 2,
+        stock: 7,
+        status: "in_stock",
+        featured: false,
+        isNew: true,
+        images: ["https://images.unsplash.com/photo-1505693314120-0d443867891c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"]
+      },
+      {
+        name: "Dining Chairs (Set of 4)",
+        sku: "PRD-029",
+        slug: "dining-chairs-set",
+        description: "Set of 4 contemporary dining chairs with padded seats and wooden legs.",
+        price: "399.99",
+        categoryId: 3,
+        stock: 12,
+        status: "in_stock",
+        featured: false,
+        isNew: false,
+        images: ["https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"]
+      },
+      {
+        name: "Kitchen Storage Cabinet",
+        sku: "PRD-030",
+        slug: "kitchen-storage-cabinet",
+        description: "Versatile kitchen storage cabinet with adjustable shelves and spacious drawers.",
+        price: "449.99",
+        discountPrice: "399.99",
+        categoryId: 3,
+        stock: 8,
+        status: "in_stock",
+        featured: true,
+        isNew: true,
+        images: ["https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"]
+      },
+      {
+        name: "Buffet Server",
+        sku: "PRD-031",
+        slug: "buffet-server",
+        description: "Elegant buffet server with wine rack and storage for dinnerware and linens.",
+        price: "599.99",
+        categoryId: 3,
+        stock: 6,
+        status: "in_stock",
+        featured: false,
+        isNew: false,
+        images: ["https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"]
+      },
+      {
+        name: "Desk Organizer",
+        sku: "PRD-032",
+        slug: "desk-organizer",
+        description: "Compact desk organizer with multiple compartments for office supplies.",
+        price: "49.99",
+        categoryId: 4,
+        stock: 30,
+        status: "in_stock",
+        featured: false,
+        isNew: true,
+        images: ["https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"]
+      },
+      {
+        name: "Office Bookshelf",
+        sku: "PRD-033",
+        slug: "office-bookshelf",
+        description: "Industrial style office bookshelf with metal frame and wooden shelves.",
+        price: "349.99",
+        categoryId: 4,
+        stock: 10,
+        status: "in_stock",
+        featured: false,
+        isNew: false,
+        images: ["https://images.unsplash.com/photo-1580327942498-53a877c6d0ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"]
       }
     ];
     
