@@ -9,6 +9,11 @@ import {
   type Review, type InsertReview
 } from "@shared/schema";
 
+import session from "express-session";
+import createMemoryStore from "memorystore";
+
+const MemoryStore = createMemoryStore(session);
+
 export interface IStorage {
   // User methods
   getUser(id: number): Promise<User | undefined>;
@@ -60,6 +65,9 @@ export interface IStorage {
   // Review methods
   getProductReviews(productId: number): Promise<Review[]>;
   createReview(review: InsertReview): Promise<Review>;
+
+  // Session store
+  sessionStore: session.Store;
 }
 
 export class MemStorage implements IStorage {
@@ -79,6 +87,8 @@ export class MemStorage implements IStorage {
   private orderItemId: number;
   private reviewId: number;
   
+  readonly sessionStore: session.Store;
+  
   constructor() {
     this.users = new Map();
     this.categories = new Map();
@@ -95,6 +105,11 @@ export class MemStorage implements IStorage {
     this.orderId = 1;
     this.orderItemId = 1;
     this.reviewId = 1;
+    
+    // Initialize session store
+    this.sessionStore = new MemoryStore({
+      checkPeriod: 86400000 // Prune expired entries every 24h
+    });
     
     this.initializeData();
   }

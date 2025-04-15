@@ -4,6 +4,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
+import { ProtectedRoute } from "./lib/protected-route";
 
 // Layout components
 import Header from "./components/layout/Header";
@@ -18,6 +19,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminProducts from "./pages/AdminProducts";
 import AdminOrders from "./pages/AdminOrders";
+import AuthPage from "./pages/auth-page";
 import NotFound from "./pages/not-found";
 
 function App() {
@@ -77,15 +79,22 @@ function Router() {
         )}
       </Route>
       
-      <Route path="/checkout">
-        {() => (
+      {/* Authentication Route */}
+      <Route path="/auth">
+        <AuthPage />
+      </Route>
+      
+      {/* Protected Routes */}
+      <ProtectedRoute 
+        path="/checkout" 
+        component={() => (
           <>
             <Header />
             <Checkout />
             <Footer />
           </>
-        )}
-      </Route>
+        )} 
+      />
       
       {/* Admin Routes */}
       <Route path="/admin/login">
