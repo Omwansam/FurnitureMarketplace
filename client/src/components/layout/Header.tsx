@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/use-auth";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,7 +19,8 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logoutMutation } = useAuth();
+  const isAdmin = user?.isAdmin || false;
   const { itemCount, openCart } = useCart();
   const [, navigate] = useLocation();
   
@@ -127,17 +128,14 @@ export default function Header() {
                         </DropdownMenuItem>
                       )}
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => logout()}>
+                      <DropdownMenuItem onClick={() => logoutMutation.mutate()}>
                         Logout
                       </DropdownMenuItem>
                     </>
                   ) : (
                     <>
                       <DropdownMenuItem asChild>
-                        <Link href="/login">Login</Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link href="/register">Register</Link>
+                        <Link href="/auth">Login / Register</Link>
                       </DropdownMenuItem>
                     </>
                   )}
