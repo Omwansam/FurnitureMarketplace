@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { useCart } from "@/context/CartContext";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/use-auth";
 import { createOrder } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -24,7 +24,8 @@ export default function Checkout() {
   const [loading, setLoading] = useState(false);
   const [, navigate] = useLocation();
   const { cartItems, subtotal, shipping, tax, total, clearCart } = useCart();
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
+  const isAuthenticated = !!user;
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -44,7 +45,7 @@ export default function Checkout() {
         <div className="max-w-md mx-auto">
           <h1 className="text-2xl font-bold mb-4">Please Log In</h1>
           <p className="mb-6">You need to be logged in to checkout.</p>
-          <Button onClick={() => navigate("/login")}>Log In</Button>
+          <Button onClick={() => navigate("/auth")}>Log In</Button>
         </div>
       </div>
     );
