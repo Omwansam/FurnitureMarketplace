@@ -10,8 +10,12 @@ import {
   insertReviewSchema 
 } from "@shared/schema";
 import { ZodError } from "zod";
+import { setupAuth } from "./auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Set up authentication routes and middleware
+  setupAuth(app);
+  
   // Error handler middleware
   const handleError = (err: any, res: Response) => {
     console.error(err);
@@ -24,55 +28,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     return res.status(500).json({ message: "Internal server error" });
   };
 
-  // USERS
-  app.post("/api/register", async (req: Request, res: Response) => {
-    try {
-      const userData = insertUserSchema.parse(req.body);
-      
-      // Check if username or email already exists
-      const existingUsername = await storage.getUserByUsername(userData.username);
-      if (existingUsername) {
-        return res.status(400).json({ message: "Username already exists" });
-      }
-      
-      const existingEmail = await storage.getUserByEmail(userData.email);
-      if (existingEmail) {
-        return res.status(400).json({ message: "Email already exists" });
-      }
-      
-      // Create the user
-      const user = await storage.createUser(userData);
-      
-      // Don't return the password
-      const { password, ...safeUser } = user;
-      res.status(201).json(safeUser);
-    } catch (err) {
-      handleError(err, res);
-    }
-  });
-  
-  app.post("/api/login", async (req: Request, res: Response) => {
-    try {
-      const { username, password } = req.body;
-      
-      // Find user by username
-      const user = await storage.getUserByUsername(username);
-      if (!user) {
-        return res.status(401).json({ message: "Invalid credentials" });
-      }
-      
-      // Check password (in a real app, would use bcrypt to compare)
-      if (user.password !== password) {
-        return res.status(401).json({ message: "Invalid credentials" });
-      }
-      
-      // Don't return the password
-      const { password: _, ...safeUser } = user;
-      res.json(safeUser);
-    } catch (err) {
-      handleError(err, res);
-    }
-  });
+  // Authentication routes are now handled in auth.ts
   
   // CATEGORIES
   app.get("/api/categories", async (_req: Request, res: Response) => {

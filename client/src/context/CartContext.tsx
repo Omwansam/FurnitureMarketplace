@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { addToCart, getCart, updateCartItem, removeCartItem } from "@/lib/api";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "@/hooks/use-auth";
 
 // Define types
 interface CartItem {
